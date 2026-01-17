@@ -1,0 +1,14 @@
+agents:
+  - id: reseacher
+    role: Research Assistant
+    goal: Find key insights about electric vehicles
+
+  - id: write
+    role: Content Writer
+    goal: Write a concise summary using the research
+
+workflow:
+  type: sequential
+  steps:
+    - agent: researcher
+    - agent: writer
