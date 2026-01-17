@@ -3,5 +3,4 @@ class LLMClient {
     throw new Error("generate() must be implemented");
   }
 }
-
 module.exports = LLMClient;
