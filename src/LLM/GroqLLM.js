@@ -9,13 +9,16 @@ class GroqLLM extends LLMClient {
     });
   }
 
-  async generate({ agentId, role, goal, context }) {
+  async generate({ agentId, role, goal, context, instruction, tools }) {
+    const toolsSection = tools ? `\n\nAvailable Tools:\n${tools}` : "";
+    const instructionSection = instruction ? `\n\nSpecial Instructions:\n${instruction}` : "";
+    
     const prompt = `
 You are an AI agent.
 
 Agent ID: ${agentId}
 Role: ${role}
-Goal: ${goal}
+Goal: ${goal}${instructionSection}${toolsSection}
 
 Shared Context:
 ${Object.entries(context || {})

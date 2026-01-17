@@ -1,14 +1,15 @@
 agents:
-  - id: retriever
-    role: Data Retrieval Specialist
-    goal: Retrieve and summarize the previous electric vehicle research from memory
-
-  - id: analyzer
-    role: Data Analyzer
-    goal: Analyze the retrieved research and provide deeper insights or recommendations
+  - id: analyst
+    role: Data Analyst
+    goal: Analyze CSV data and summarize trends
+    instruction: "IMPORTANT: You must use tools to complete your task. Step 1: Use the fileread tool to read 'sample_data.csv'. Step 2: Use the python tool to analyze the data and calculate: total revenue, average units sold, trend direction, and growth rate. Format your response with both the raw tool results and your analysis."
+    tools:
+      - python
+      - fileread
+      - calculator
 
 workflow:
   type: sequential
   steps:
-    - agent: retriever
-    - agent: analyzer
+    - agent: analyst
+

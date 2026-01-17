@@ -1,0 +1,45 @@
+
+================================================================================
+Execution Started: 2026-01-17T23:16:21.750Z
+Execution ID: 2026-01-17T23-16-21
+================================================================================
+
+[23:16:21.751] ℹ️  [ORCHESTRATOR] Creating 3 agents from configuration
+[23:16:21.752] ✅ [AGENT_CREATION] Created agent 'root_agent' (Root Orchestrator)
+[23:16:21.753] ✅ [AGENT_CREATION] Created agent 'data_collector' (Data Collector)
+[23:16:21.753] ✅ [AGENT_CREATION] Created agent 'insight_generator' (Insight Generator)
+[23:16:21.754] ℹ️  [SUB_AGENT_LINKING] Linked 2 sub-agents to 'root_agent'
+[23:16:21.755] 🚀 [WORKFLOW START] Type: sequential, Agents: 3
+[23:16:21.761] ℹ️  [WORKFLOW] Starting SEQUENTIAL execution with 1 agents
+[23:16:21.763] ℹ️  [SEQUENTIAL_EXECUTOR] Sequential execution: 1 agents
+[23:16:21.764] 🤖 [AGENT START] Agent 'root_agent' (Root Orchestrator) is executing...
+[23:16:21.834] 💾 [DB RETRIEVE] Key 'root_agent_context' in 70ms
+[23:16:23.179] ❌ [AGENT_ERROR] Agent 'root_agent' failed: Connection error.
+Stack: Error: Connection error.
+    at Groq.makeRequest (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\node_modules\groq-sdk\core.js:312:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async GroqLLM.generate (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\LLM\GroqLLM.js:29:26)
+    at async Agent.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:72:22)
+    at async SequentialExecutor.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Sequential.js:10:24)
+    at async Orchestrator.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Orchestrator.js:49:9)
+    at async main (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\index.js:71:5)
+[23:16:23.181] ❌ [AGENT END] Agent 'root_agent' completed in 1415ms
+[23:16:23.181] ❌ [SEQUENTIAL_EXECUTOR] Sequential execution halted at agent 'root_agent'
+Stack: Error: Connection error.
+    at Groq.makeRequest (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\node_modules\groq-sdk\core.js:312:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async GroqLLM.generate (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\LLM\GroqLLM.js:29:26)
+    at async Agent.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:72:22)
+    at async SequentialExecutor.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Sequential.js:10:24)
+    at async Orchestrator.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Orchestrator.js:49:9)
+    at async main (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\index.js:71:5)
+[23:16:23.182] ❌ [WORKFLOW] Workflow execution failed: Connection error.
+Stack: Error: Connection error.
+    at Groq.makeRequest (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\node_modules\groq-sdk\core.js:312:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async GroqLLM.generate (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\LLM\GroqLLM.js:29:26)
+    at async Agent.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:72:22)
+    at async SequentialExecutor.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Sequential.js:10:24)
+    at async Orchestrator.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Orchestrator.js:49:9)
+    at async main (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\index.js:71:5)
+[23:16:23.183] ❌ [WORKFLOW END] Completed in 1427ms

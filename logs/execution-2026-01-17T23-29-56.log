@@ -1,0 +1,36 @@
+
+================================================================================
+Execution Started: 2026-01-17T23:29:56.528Z
+Execution ID: 2026-01-17T23-29-56
+================================================================================
+
+[23:29:56.529] 🤖 [AGENT START] Agent 'test_agent' (Test Analyst) is executing...
+[23:29:56.530] 💾 [DB RETRIEVE] Key 'test_agent_context' in 0ms
+[23:29:56.531] 🧠 [LLM CALL] test-mock in 0ms
+[23:29:56.532] ℹ️  [TOOL_INVOCATION] Tool invocation detected: fileread
+[23:29:56.532] ℹ️  [TOOL] Executing tool: fileread
+[23:29:56.533] ℹ️  [TOOL_DETAIL] Reading file: D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\sample_data.csv
+[23:29:56.534] ℹ️  [TOOL_RESULT] Read 391 bytes from D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\sample_data.csv
+[23:29:56.534] ✅ [TOOL] Tool 'fileread' completed
+[23:29:56.535] ℹ️  [TOOL_INVOCATION] Tool invocation detected: calculator
+[23:29:56.535] ℹ️  [TOOL] Executing tool: calculator
+[23:29:56.536] ℹ️  [TOOL_DEBUG] Calculator parsing: "(120000 - 45000) * 100 / 45000"
+[23:29:56.536] ❌ [TOOL] Tool 'calculator' failed: Calculation failed: Invalid characters in expression. Only numbers and +, -, *, /, (, ) allowed. Got: "(120000 - 45000) * 100 / 45000"
+Stack: Error: Calculation failed: Invalid characters in expression. Only numbers and +, -, *, /, (, ) allowed. Got: "(120000 - 45000) * 100 / 45000"
+    at ToolManager.calculateTool (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:84:13)
+    at ToolManager.execute (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:41:54)
+    at Agent.processTooInvocations (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:147:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Agent.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:82:23)
+    at async testToolInvocation (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\test-direct-tool-invocation.js:60:20)
+[23:29:56.537] ❌ [TOOL_ERROR] Failed to execute tool calculator: Calculation failed: Invalid characters in expression. Only numbers and +, -, *, /, (, ) allowed. Got: "(120000 - 45000) * 100 / 45000"
+Stack: Error: Calculation failed: Invalid characters in expression. Only numbers and +, -, *, /, (, ) allowed. Got: "(120000 - 45000) * 100 / 45000"
+    at ToolManager.calculateTool (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:84:13)
+    at ToolManager.execute (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:41:54)
+    at Agent.processTooInvocations (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:147:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Agent.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:82:23)
+    at async testToolInvocation (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\test-direct-tool-invocation.js:60:20)
+[23:29:56.537] 💾 [DB STORE] Key 'test_agent' in 0ms
+[23:29:56.538] ✅ [AGENT END] Agent 'test_agent' completed in 9ms
+[23:29:56.538] ✅ [TEST] Tool invocation test passed

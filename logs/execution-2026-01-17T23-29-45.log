@@ -1,0 +1,35 @@
+
+================================================================================
+Execution Started: 2026-01-17T23:29:45.747Z
+Execution ID: 2026-01-17T23-29-45
+================================================================================
+
+[23:29:45.749] 🤖 [AGENT START] Agent 'test_agent' (Test Analyst) is executing...
+[23:29:45.749] 💾 [DB RETRIEVE] Key 'test_agent_context' in 0ms
+[23:29:45.750] 🧠 [LLM CALL] test-mock in 0ms
+[23:29:45.751] ℹ️  [TOOL_INVOCATION] Tool invocation detected: fileread
+[23:29:45.752] ℹ️  [TOOL] Executing tool: fileread
+[23:29:45.753] ℹ️  [TOOL_DETAIL] Reading file: D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\sample_data.csv
+[23:29:45.754] ℹ️  [TOOL_RESULT] Read 391 bytes from D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\sample_data.csv
+[23:29:45.755] ✅ [TOOL] Tool 'fileread' completed
+[23:29:45.756] ℹ️  [TOOL_INVOCATION] Tool invocation detected: calculator
+[23:29:45.756] ℹ️  [TOOL] Executing tool: calculator
+[23:29:45.757] ❌ [TOOL] Tool 'calculator' failed: Calculation failed: Invalid characters in expression. Only numbers and +, -, *, /, (, ) allowed
+Stack: Error: Calculation failed: Invalid characters in expression. Only numbers and +, -, *, /, (, ) allowed
+    at ToolManager.calculateTool (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:80:13)
+    at ToolManager.execute (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:41:54)
+    at Agent.processTooInvocations (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:147:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Agent.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:82:23)
+    at async testToolInvocation (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\test-direct-tool-invocation.js:60:20)
+[23:29:45.759] ❌ [TOOL_ERROR] Failed to execute tool calculator: Calculation failed: Invalid characters in expression. Only numbers and +, -, *, /, (, ) allowed
+Stack: Error: Calculation failed: Invalid characters in expression. Only numbers and +, -, *, /, (, ) allowed
+    at ToolManager.calculateTool (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:80:13)
+    at ToolManager.execute (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:41:54)
+    at Agent.processTooInvocations (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:147:47)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Agent.run (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:82:23)
+    at async testToolInvocation (D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\test-direct-tool-invocation.js:60:20)
+[23:29:45.760] 💾 [DB STORE] Key 'test_agent' in 0ms
+[23:29:45.761] ✅ [AGENT END] Agent 'test_agent' completed in 12ms
+[23:29:45.762] ✅ [TEST] Tool invocation test passed

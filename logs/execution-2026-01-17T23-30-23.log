@@ -1,0 +1,22 @@
+
+================================================================================
+Execution Started: 2026-01-17T23:30:23.772Z
+Execution ID: 2026-01-17T23-30-23
+================================================================================
+
+[23:30:23.773] 🤖 [AGENT START] Agent 'test_agent' (Test Analyst) is executing...
+[23:30:23.774] 💾 [DB RETRIEVE] Key 'test_agent_context' in 1ms
+[23:30:23.774] 🧠 [LLM CALL] test-mock in 0ms
+[23:30:23.775] ℹ️  [TOOL_INVOCATION] Tool invocation detected: fileread
+[23:30:23.776] ℹ️  [TOOL] Executing tool: fileread
+[23:30:23.776] ℹ️  [TOOL_DETAIL] Reading file: D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\sample_data.csv
+[23:30:23.778] ℹ️  [TOOL_RESULT] Read 391 bytes from D:\myfiles\Desktop\Mirage Final\Mirage-Multi-Agent-Orchestrator\sample_data.csv
+[23:30:23.778] ✅ [TOOL] Tool 'fileread' completed
+[23:30:23.779] ℹ️  [TOOL_INVOCATION] Tool invocation detected: calculator
+[23:30:23.779] ℹ️  [TOOL] Executing tool: calculator
+[23:30:23.780] ℹ️  [TOOL_DEBUG] Calculator parsing: "(120000 - 45000) * 100 / 45000"
+[23:30:23.780] ℹ️  [TOOL_RESULT] Calculator: (120000 - 45000) * 100 / 45000 = 166.66666666666666
+[23:30:23.781] ✅ [TOOL] Tool 'calculator' completed
+[23:30:23.781] 💾 [DB STORE] Key 'test_agent' in 0ms
+[23:30:23.781] ✅ [AGENT END] Agent 'test_agent' completed in 8ms
+[23:30:23.782] ✅ [TEST] Tool invocation test passed

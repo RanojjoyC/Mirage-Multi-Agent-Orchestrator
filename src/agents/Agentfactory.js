@@ -14,13 +14,17 @@ class AgentFactory {
         .filter(agent => agent !== undefined);
     }
 
+    // Extract tools array from config (optional)
+    const tools = agentConfig.tools || [];
+
     return new Agent({
       id: agentConfig.id,
       role: agentConfig.role || agentConfig.id,
       goal: agentConfig.goal || "",
       llm,
       instruction: agentConfig.instruction,
-      subAgents
+      subAgents,
+      tools  // Pass tools array to Agent
     });
   }
 }
