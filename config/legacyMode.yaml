@@ -1,0 +1,14 @@
+agents:
+  - id: retriever
+    role: Data Retrieval Specialist
+    goal: Retrieve and summarize the previous electric vehicle research from memory
+
+  - id: analyzer
+    role: Data Analyzer
+    goal: Analyze the retrieved research and provide deeper insights or recommendations
+
+workflow:
+  type: sequential
+  steps:
+    - agent: retriever
+    - agent: analyzer

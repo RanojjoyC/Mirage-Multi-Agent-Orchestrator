@@ -11,9 +11,22 @@ class Orchestrator {
 
   createAgents() {
     const agentMap = {};
+    
+    // First pass: create all agents
     for (const agentConfig of this.config.agents) {
-      agentMap[agentConfig.id] = AgentFactory.create(agentConfig);
+      agentMap[agentConfig.id] = AgentFactory.create(agentConfig, agentMap);
     }
+    
+    // Second pass: link sub-agents (after all agents are created)
+    for (const agentConfig of this.config.agents) {
+      if (agentConfig.sub_agents && agentConfig.sub_agents.length > 0) {
+        const agent = agentMap[agentConfig.id];
+        agent.subAgents = agentConfig.sub_agents
+          .map(subAgentId => agentMap[subAgentId])
+          .filter(agent => agent !== undefined);
+      }
+    }
+    
     return agentMap;
   }
 

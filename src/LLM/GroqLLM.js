@@ -25,14 +25,20 @@ ${Object.entries(context || {})
 Produce your output clearly.
 `;
 
-    const completion = await this.client.chat.completions.create({
-      model: "llama-3.1-8b-instant",
-      messages: [
-        { role: "user", content: prompt }
-      ]
-    });
+    try {
+      const completion = await this.client.chat.completions.create({
+        model: "llama-3.1-8b-instant",
+        messages: [
+          { role: "user", content: prompt }
+        ]
+      });
 
-    return completion.choices[0].message.content;
+      return completion.choices[0].message.content;
+    } catch (err) {
+      console.error("❌ Groq API Error:", err.message);
+      console.error("Status:", err.status);
+      throw err;
+    }
   }
 }
 
