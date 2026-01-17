@@ -5,13 +5,19 @@ class Agent {
     this.goal = goal;
     this.llm = llm;
   }
+
   async run(context) {
-    return this.llm.generate({
+    const output = await this.llm.generate({
       agentId: this.id,
       role: this.role,
       goal: this.goal,
-      context
+      context: await context.getAll(),
     });
+
+    await context.set(this.id, output);
+
+    return output;
   }
 }
+
 module.exports = Agent;

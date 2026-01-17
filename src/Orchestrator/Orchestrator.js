@@ -1,28 +1,27 @@
 const SequentialExecutor = require("./Sequential");
 const ParallelExecutor = require("./Parallel");
 const AgentFactory = require("../agents/Agentfactory");
-const ContextStore = require("../context/ContextStore");
 
 class Orchestrator {
-  constructor(config) {
+  constructor(config, contextStore) {
     this.config = config;
-    this.context = new ContextStore();
+    this.context = contextStore;
     this.agents = this.createAgents();
   }
 
   createAgents() {
-    const map = {};
-    for (const agent of this.config.agents) {
-      map[agent.id] = AgentFactory.create(agent);
+    const agentMap = {};
+    for (const agentConfig of this.config.agents) {
+      agentMap[agentConfig.id] = AgentFactory.create(agentConfig);
     }
-    return map;
+    return agentMap;
   }
 
   async run() {
     const { workflow } = this.config;
 
     if (workflow.type === "sequential") {
-      const agents = workflow.steps.map(s => this.agents[s.agent]);
+      const agents = workflow.steps.map(step => this.agents[step.agent]);
       await SequentialExecutor.run(agents, this.context);
     }
 
@@ -36,12 +35,14 @@ class Orchestrator {
       }
     }
 
-    this.printResult();
+    await this.printResult();
   }
 
-  printResult() {
+  async printResult() {
     console.log("\n===== FINAL OUTPUT =====");
-    for (const [id, output] of Object.entries(this.context.getAll())) {
+    const allContext = await this.context.getAll();
+
+    for (const [id, output] of Object.entries(allContext)) {
       console.log(`\n--- ${id} ---\n${output}`);
     }
   }

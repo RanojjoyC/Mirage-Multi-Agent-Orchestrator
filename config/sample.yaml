@@ -1,7 +1,7 @@
 agents:
-  - id: researcher
-    role: Researcher
-    goal: Research the recent rise in electric vehicle sales
+  - id: casual talk
+    role: casual talk
+    goal: are you able to remember information from previuos yaml configs?
 
   - id: writer
     role: Technical Writer
@@ -10,5 +10,5 @@ agents:
 workflow:
   type: sequential
   steps:
-    - agent: researcher
+    - agent: casual talk
     - agent: writer

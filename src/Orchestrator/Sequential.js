@@ -1,8 +1,11 @@
 class SequentialExecutor {
-  static async run(agents, contextStore) {
+  static async run(agents, context) {
     for (const agent of agents) {
-      const output = await agent.run(contextStore.getAll());
-      contextStore.set(agent.id, output);
+      // Run agent with current context
+      const output = await agent.run(context);
+
+      // Persist agent output
+      await context.set(agent.id, output);
     }
   }
 }

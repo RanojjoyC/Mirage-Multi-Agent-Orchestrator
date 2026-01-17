@@ -1,11 +1,17 @@
 class ParallelExecutor {
-  static async run(agents, contextStore) {
+  static async run(agents, context) {
+    // Run all agents in parallel
     const results = await Promise.all(
-      agents.map(agent => agent.run(contextStore.getAll()))
+      agents.map(agent => agent.run(context))
     );
-    agents.forEach((agent, i) => {
-      contextStore.set(agent.id, results[i]);
-    });
+
+    // Persist outputs after all complete
+    await Promise.all(
+      agents.map((agent, index) =>
+        context.set(agent.id, results[index])
+      )
+    );
   }
 }
+
 module.exports = ParallelExecutor;

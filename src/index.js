@@ -1,16 +1,30 @@
+const path = require("path");
 require("dotenv").config();
+
+
 const { parseYAML } = require("./parser/yamlParser");
 const { validateConfig } = require("./parser/validator");
 const Orchestrator = require("./Orchestrator/Orchestrator");
+const ContextStore = require("./context/ContextStore");
 
-const CONFIG_PATH = "config/sample.yaml";
+const CONFIG_PATH = path.join(__dirname, "../config/sample.yaml");
 
-try {
-  const config = parseYAML(CONFIG_PATH);
-  validateConfig(config);
+async function main() {
+  try {
+    const config = parseYAML(CONFIG_PATH);
+    validateConfig(config);
 
-  const orchestrator = new Orchestrator(config);
-  orchestrator.run();
-} catch (err) {
-  console.error("❌ Error:", err.message);
+    const contextStore = new ContextStore();
+
+    const orchestrator = new Orchestrator(config, contextStore);
+
+    await orchestrator.run();
+
+    await contextStore.flush();
+  } catch (err) {
+    console.error("❌ Error:", err.message);
+    process.exit(1);
+  }
 }
+
+main();
