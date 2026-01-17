@@ -1,0 +1,14 @@
+{
+  "name": "mirage-multi-agent-orchestrator",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "groq-sdk": "^0.37.0",
+    "yaml": "^2.8.2"
+  }
+}
