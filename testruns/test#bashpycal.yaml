@@ -1,0 +1,25 @@
+agents:
+  - id: health_orchestrator
+    role: System Health Orchestrator
+    goal: Monitor system health and report issues
+    tools: [python]
+    sub_agents:
+      - health_checker
+      - issue_reporter
+
+  - id: health_checker
+    role: System Health Checker
+    goal: Check system resources and health metrics
+    instruction: "Use bash to check disk usage, memory, processes, and system status. Examples: [TOOL: bash | {\"command\": \"df -h\"}], [TOOL: bash | {\"command\": \"free -h\"}], [TOOL: bash | {\"command\": \"ps aux --sort=-%cpu | head -10\"}], [TOOL: bash | {\"command\": \"uptime\"}]"
+    tools: [bash]
+
+  - id: issue_reporter
+    role: Issue Reporter
+    goal: Generate health reports and alerts
+    instruction: "Use python to analyze health metrics, identify issues, and generate alerts"
+    tools: [python, calculator]
+
+workflow:
+  type: sequential
+  steps:
+    - agent: health_orchestrator

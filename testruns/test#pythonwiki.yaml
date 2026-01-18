@@ -1,0 +1,18 @@
+agents:
+  - id: researcher
+    role: Main Researcher
+    goal: Coordinate research task
+    instruction: "Web fetch https://en.wikipedia.org/wiki/Main_Page, and store it in a file then send file to programmer for print syntax for python."
+    tools: [webfetch, fileread]
+
+  - id: programmer
+    role: Programmer
+    goal: Collect and print research data
+    instruction: "Use python to print the contents of the page fetched by researcher in the file given by researcher."
+    tools: [fileread, webfetch, python]
+
+workflow:
+  type: sequential
+  steps:
+    - agent: researcher
+    - agent: programmer
