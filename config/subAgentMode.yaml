@@ -1,0 +1,25 @@
+agents:
+  - id: root_agent
+    role: Root Orchestrator
+    goal: Coordinate research and analysis tasks
+    instruction: "Delegate to data_collector to fetch research data from https://jsonplaceholder.typicode.com/posts/1, then to insight_generator for analysis."
+    tools: [python, calculator]
+    sub_agents:
+      - data_collector
+      - insight_generator
+
+  - id: data_collector
+    role: Data Collector
+    goal: Collect and organize research data
+    instruction: "Use webfetch to retrieve data from URLs. Example: [TOOL: webfetch | {\"url\": \"https://example.com\"}]. Also use fileread for local files and python for processing."
+    tools: [fileread, webfetch, python]
+
+  - id: insight_generator
+    role: Insight Generator
+    goal: Generate insights and recommendations from collected data
+    tools: [python, calculator]
+
+workflow:
+  type: sequential
+  steps:
+    - agent: root_agent
