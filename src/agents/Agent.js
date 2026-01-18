@@ -17,8 +17,8 @@ class Agent {
   }
 
   /**
-   * Get available tools description for LLM context
-   * @returns {string} Tools description
+   * get available tools description for LLM context
+   * @returns {string} tools description
    */
   getToolsDescription() {
     if (!this.tools || this.tools.length === 0) {
@@ -91,7 +91,7 @@ class Agent {
         logger.dbOperation("store", this.id, storeDuration);
       }
 
-      // If this agent has sub-agents, delegate tasks to them
+      // if this agent has sub-agents then delegate tasks to them
       if (this.subAgents && this.subAgents.length > 0) {
         if (logger) {
           logger.info(`Delegating to ${this.subAgents.length} sub-agents`, "SUB_AGENT_DELEGATION");
