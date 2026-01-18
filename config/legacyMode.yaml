@@ -1,15 +1,18 @@
 agents:
-  - id: analyst
-    role: Data Analyst
-    goal: Analyze CSV data and summarize trends
-    instruction: "IMPORTANT: You must use tools to complete your task. Step 1: Use the fileread tool to read 'sample_data.csv'. Step 2: Use the python tool to analyze the data and calculate: total revenue, average units sold, trend direction, and growth rate. Format your response with both the raw tool results and your analysis."
-    tools:
-      - python
-      - fileread
-      - calculator
+  - id: researcher
+    role: Main Researcher
+    goal: Coordinate research task
+    instruction: "Web fetch https://en.wikipedia.org/wiki/Main_Page, and store it in a file then send file to programmer for print syntax for python."
+    tools: [webfetch, fileread]
+
+  - id: programmer
+    role: Programmer
+    goal: Collect and print research data
+    instruction: "Use python to print the contents of the page fetched by researcher in the file given by researcher."
+    tools: [fileread, webfetch, python]
 
 workflow:
   type: sequential
   steps:
-    - agent: analyst
-
+    - agent: researcher
+    - agent: programmer

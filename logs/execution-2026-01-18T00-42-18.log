@@ -1,0 +1,81 @@
+
+================================================================================
+Execution Started: 2026-01-18T00:42:18.590Z
+Execution ID: 2026-01-18T00-42-18
+================================================================================
+
+[00:42:18.590] ℹ️  [ORCHESTRATOR] Creating 3 agents from configuration
+[00:42:18.591] ✅ [AGENT_CREATION] Created agent 'log_analyzer' (Log Analysis Orchestrator)
+[00:42:18.592] ✅ [AGENT_CREATION] Created agent 'log_collector' (Log Collector)
+[00:42:18.592] ✅ [AGENT_CREATION] Created agent 'report_generator' (Report Generator)
+[00:42:18.597] ℹ️  [SUB_AGENT_LINKING] Linked 2 sub-agents to 'log_analyzer'
+[00:42:18.598] 🚀 [WORKFLOW START] Type: sequential, Agents: 3
+[00:42:18.598] ℹ️  [WORKFLOW] Starting SEQUENTIAL execution with 1 agents
+[00:42:18.599] ℹ️  [SEQUENTIAL_EXECUTOR] Sequential execution: 1 agents
+[00:42:18.599] 🤖 [AGENT START] Agent 'log_analyzer' (Log Analysis Orchestrator) is executing...
+[00:42:18.645] 💾 [DB RETRIEVE] Key 'log_analyzer_context' in 46ms
+[00:42:19.184] 🧠 [LLM CALL] unknown in 538ms
+[00:42:21.830] 💾 [DB STORE] Key 'log_analyzer' in 2646ms
+[00:42:21.831] ℹ️  [SUB_AGENT_DELEGATION] Delegating to 2 sub-agents
+[00:42:21.831] 🤖 [AGENT START] Agent 'log_collector' (Log Collector) is executing...
+[00:42:21.831] 💾 [DB RETRIEVE] Key 'log_collector_context' in 0ms
+[00:42:22.269] 🧠 [LLM CALL] unknown in 438ms
+[00:42:22.270] ℹ️  [TOOL_INVOCATION] Tool invocation detected: bash
+[00:42:22.270] ℹ️  [TOOL] Executing tool: bash
+[00:42:22.271] ℹ️  [TOOL_DETAIL] Executing bash command: find . -name '*.log' -type f
+[00:42:22.296] ❌ [TOOL] Tool 'bash' failed: Bash execution failed: Command failed: find . -name '*.log' -type f
+File not found - '*.log'
+
+Stack: Error: Bash execution failed: Command failed: find . -name '*.log' -type f
+File not found - '*.log'
+
+    at ToolManager.bashTool (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:284:13)
+    at ToolManager.execute (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:41:54)
+    at Agent.processTooInvocations (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:147:47)
+    at Agent.run (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:82:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Agent.run (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:101:11)
+    at async SequentialExecutor.run (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Sequential.js:10:24)
+    at async Orchestrator.run (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Orchestrator.js:49:9)
+    at async main (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\index.js:71:5)
+[00:42:22.297] ❌ [TOOL_ERROR] Failed to execute tool bash: Bash execution failed: Command failed: find . -name '*.log' -type f
+File not found - '*.log'
+
+Stack: Error: Bash execution failed: Command failed: find . -name '*.log' -type f
+File not found - '*.log'
+
+    at ToolManager.bashTool (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:284:13)
+    at ToolManager.execute (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\tools\ToolManager.js:41:54)
+    at Agent.processTooInvocations (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:147:47)
+    at Agent.run (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:82:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Agent.run (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\agents\Agent.js:101:11)
+    at async SequentialExecutor.run (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Sequential.js:10:24)
+    at async Orchestrator.run (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\Orchestrator\Orchestrator.js:49:9)
+    at async main (D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\src\index.js:71:5)
+[00:42:22.689] 💾 [DB STORE] Key 'log_collector' in 392ms
+[00:42:22.689] ✅ [AGENT END] Agent 'log_collector' completed in 858ms
+[00:42:22.689] 🤖 [AGENT START] Agent 'report_generator' (Report Generator) is executing...
+[00:42:22.690] 💾 [DB RETRIEVE] Key 'report_generator_context' in 0ms
+[00:42:23.955] 🧠 [LLM CALL] unknown in 1265ms
+[00:42:24.323] 💾 [DB STORE] Key 'report_generator' in 367ms
+[00:42:24.323] ✅ [AGENT END] Agent 'report_generator' completed in 1634ms
+[00:42:24.324] ✅ [AGENT END] Agent 'log_analyzer' completed in 5725ms
+[00:42:24.677] ✅ [SEQUENTIAL_EXECUTOR] Sequential execution completed: 1 agents
+[00:42:24.678] ✅ [WORKFLOW END] Completed in 6080ms
+
+================================================================================
+EXECUTION SUMMARY
+================================================================================
+Execution ID: 2026-01-18T00-42-18
+Total Duration: 6090ms
+Start Time: 2026-01-18T00:42:18.589Z
+End Time: 2026-01-18T00:42:24.679Z
+Total Events: 31
+Agents Executed: 3
+DB Operations: 6
+LLM Calls: 3
+Errors: 2
+Log File: D:\AuraVerse2.0\Mirage-Multi-Agent-Orchestrator\logs\execution-2026-01-18T00-42-18.log
+================================================================================
+
