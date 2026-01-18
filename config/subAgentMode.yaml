@@ -1,25 +1,25 @@
 agents:
-  - id: root_agent
-    role: Root Orchestrator
-    goal: Coordinate research and analysis tasks
-    instruction: "Delegate to data_collector to fetch research data from https://jsonplaceholder.typicode.com/posts/1, then to insight_generator for analysis."
-    tools: [python, calculator]
+  - id: health_orchestrator
+    role: System Health Orchestrator
+    goal: Monitor system health and report issues
+    tools: [python]
     sub_agents:
-      - data_collector
-      - insight_generator
+      - health_checker
+      - issue_reporter
 
-  - id: data_collector
-    role: Data Collector
-    goal: Collect and organize research data
-    instruction: "Use webfetch to retrieve data from URLs. Example: [TOOL: webfetch | {\"url\": \"https://example.com\"}]. Also use fileread for local files and python for processing."
-    tools: [fileread, webfetch, python]
+  - id: health_checker
+    role: System Health Checker
+    goal: Check system resources and health metrics
+    instruction: "Use bash to check disk usage, memory, processes, and system status. Examples: [TOOL: bash | {\"command\": \"df -h\"}], [TOOL: bash | {\"command\": \"free -h\"}], [TOOL: bash | {\"command\": \"ps aux --sort=-%cpu | head -10\"}], [TOOL: bash | {\"command\": \"uptime\"}]"
+    tools: [bash]
 
-  - id: insight_generator
-    role: Insight Generator
-    goal: Generate insights and recommendations from collected data
+  - id: issue_reporter
+    role: Issue Reporter
+    goal: Generate health reports and alerts
+    instruction: "Use python to analyze health metrics, identify issues, and generate alerts"
     tools: [python, calculator]
 
 workflow:
   type: sequential
   steps:
-    - agent: root_agent
+    - agent: health_orchestrator

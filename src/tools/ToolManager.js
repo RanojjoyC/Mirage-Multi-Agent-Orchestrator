@@ -256,7 +256,7 @@ class ToolManager {
       const command = args.command.trim();
 
       // Security: block dangerous commands
-      const dangerous = ["rm", "rmdir", "dd", "mkfs", "shutdown", "reboot"];
+      const dangerous = ["rm", "rmdir", "dd", "mkfs", "shutdown", "reboot", "del", "format"];
       const isDangerous = dangerous.some(cmd => 
         command.toLowerCase().startsWith(cmd)
       );
@@ -266,22 +266,53 @@ class ToolManager {
       }
 
       if (logger) {
-        logger.info(`Executing bash command: ${command}`, "TOOL_DETAIL");
+        logger.info(`Executing command: ${command}`, "TOOL_DETAIL");
       }
 
-      const output = execSync(command, {
-        timeout: 30000,
-        encoding: "utf-8",
-        maxBuffer: 10 * 1024 * 1024
-      });
+      // Handle Windows vs Unix-like systems
+      const isWindows = process.platform === 'win32';
+      let output;
+
+      if (isWindows) {
+        // On Windows, use PowerShell for command execution
+        try {
+          output = execSync(`powershell -NoProfile -Command "${command.replace(/"/g, '\\"')}"`, {
+            timeout: 30000,
+            encoding: "utf-8",
+            maxBuffer: 10 * 1024 * 1024,
+            stdio: ['pipe', 'pipe', 'pipe']
+          });
+        } catch (psError) {
+          // Fallback to cmd.exe if PowerShell fails
+          if (logger) {
+            logger.info(`PowerShell failed, trying cmd.exe`, "TOOL_DETAIL");
+          }
+          output = execSync(`cmd /c "${command}"`, {
+            timeout: 30000,
+            encoding: "utf-8",
+            maxBuffer: 10 * 1024 * 1024
+          });
+        }
+      } else {
+        // On Unix-like systems, use bash
+        output = execSync(`bash -c "${command.replace(/"/g, '\\"')}"`, {
+          timeout: 30000,
+          encoding: "utf-8",
+          maxBuffer: 10 * 1024 * 1024
+        });
+      }
 
       if (logger) {
-        logger.info(`Bash command completed, output: ${output.length} chars`, "TOOL_RESULT");
+        logger.info(`Command completed, output: ${output.length} chars`, "TOOL_RESULT");
       }
 
-      return output;
+      return output.trim() || "Command executed successfully (no output)";
     } catch (err) {
-      throw new Error(`Bash execution failed: ${err.message}`);
+      const errorMsg = err.stderr ? err.stderr.toString() : err.message;
+      if (logger) {
+        logger.error(`Command execution failed: ${errorMsg}`, err, "TOOL_ERROR");
+      }
+      throw new Error(`Command execution failed: ${errorMsg}`);
     }
   }
 
